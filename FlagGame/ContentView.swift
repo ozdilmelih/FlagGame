@@ -35,6 +35,31 @@ extension Color {
         }
 }
 
+struct FlagButton: View {
+    var number: Int
+    var flagTapped: (Int) -> Void // Function to handle flag tap
+    var countriesOnGame: [String] // Array of country names
+    
+    @State private var isSpinning = false
+    
+    var body: some View {
+        Button(action: {
+            withAnimation{
+                flagTapped(number)
+                isSpinning.toggle()
+            }
+        }, label: {
+          Image(countriesOnGame[number])
+                .resizable()
+                .frame(width: 200.0, height: 130.0)
+                .clipShape(.rect(cornerRadius: 20))
+                .rotation3DEffect(.degrees(isSpinning ? 360 : 0), axis: (x:0, y:1, z:0))
+                .padding()
+                
+        })
+    }
+}
+
 
 struct ContentView: View {
     @State private var countries = ["Austria", "Andorra", "Albania", "Bulgaria", "Bosnia And Herzegovina", "Belgium", "Belarus", "Denmark", "Czech Republic", "Croatia", "Greece", "Germany", "Georgia", "France", "Finland", "Estonia", "Italy", "Ireland", "Iceland", "Hungary", "Macedonia", "Luxembourg", "Lithuania"].shuffled()
@@ -80,22 +105,11 @@ struct ContentView: View {
                     Spacer()
                     
                     ForEach(0..<3) { number in
-                        Button(action: {
-                            flagTapped(number)
-                        }, label: {
-                            Image(countriesOnGame[number])
-                                .resizable()
-                                .frame(width: 200.0, height: 130.0)
-                                .clipShape(.rect(cornerRadius: 20))
-                                .padding()
-                        })
-                        
+                        FlagButton(number:number, flagTapped: flagTapped, countriesOnGame: countriesOnGame)
                         .background(.ultraThinMaterial)
                         .clipShape(.rect(cornerRadius: 30))
                         .transition(.opacity)
                     }
-                    
-                    
                     
                     Spacer()
                     
