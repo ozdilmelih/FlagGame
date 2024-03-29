@@ -54,7 +54,7 @@ struct FlagButton: View {
                 .frame(width: 200.0, height: 130.0)
                 .clipShape(.rect(cornerRadius: 20))
                 .rotation3DEffect(.degrees(isSpinning ? 360 : 0), axis: (x:0, y:1, z:0))
-                .padding()
+                .padding(10)
                 
         })
     }
@@ -78,28 +78,28 @@ struct ContentView: View {
     var body: some View {
             ZStack {
                 RadialGradient(stops: [
-                    .init(color: Color(hex: "c21927"), location: 0.3),
-                    .init(color: Color(hex: "0a9396"), location: 0.6)
+                    .init(color: Color(hex: "0a7296"), location: 0.1),
+                    .init(color: Color(hex: "0a8896"), location: 0.6)
                 ], center: .top, startRadius: 100, endRadius: 500)
                 .ignoresSafeArea()
                 
                 VStack (spacing:5){
                     Spacer()
                     VStack{
-                        Text("Tap the flag of")
+                        Text("Choose the flag of")
                             .foregroundStyle(.white)
-                            .font(.subheadline.weight(.heavy))
+                            .font(.custom("ChalkboardSE-Regular", size: 16))
                         
                         Text(countriesOnGame[correctAnswer])
                             .frame(width: 300)
                             .foregroundStyle(.white)
-                            .font(.largeTitle.weight(.semibold))
+                            .font(.custom("ChalkboardSE-Regular", size: 25))
                     }
                     Spacer()
-                    Text("Remaining \(Image(systemName: "flag.square.fill")): \(remainingFlags-3)")
-                        .font(.largeTitle)
-                        .padding()
-                        .background(.ultraThinMaterial)
+                    Text("Remaining \(Image(systemName: "flag.square")): \(remainingFlags-3)")
+                        .font(.custom("ChalkboardSE-Regular", size: 30))
+                        .padding(12)
+                        .background(Color(hex:"#88e319"))
                         .clipShape(.rect(cornerRadius: 20))
                         .foregroundColor(.white)
                     Spacer()
@@ -110,13 +110,14 @@ struct ContentView: View {
                         .clipShape(.rect(cornerRadius: 30))
                         .transition(.opacity)
                     }
+                    .padding(3)
                     
                     Spacer()
                     
-                    Text("Score: \(score)")
-                        .font(.largeTitle)
-                        .padding()
-                        .background(.ultraThinMaterial)
+                    Text("Result: \(score)")
+                        .font(.custom("ChalkboardSE-Regular", size: 40))
+                        .padding(13)
+                        .background(Color(hex:"#88e319"))
                         .clipShape(.rect(cornerRadius: 20))
                         .foregroundColor(.white)
                     Spacer()
@@ -173,24 +174,23 @@ struct WrongAnswerView: View {
         ZStack{
             
             LinearGradient(stops: [
-                .init(color: Color(hex: "9b2226"), location: 0.3),
-                .init(color: Color(hex: "0a9396"), location: 0.6)
+                .init(color: Color(hex: "034dad"), location: 0.2),
+                .init(color: Color(hex: "0a8896"), location: 0.8)
             ], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
             VStack {
-                Text("The correct answer for \(correctCountry) was:")
-                    .font(.title2)
+                Text("The correct answer was:")
+                    .font(.custom("ChalkboardSE-Regular", size: 25))
                     .padding()
                     .background(.ultraThinMaterial)
                     .clipShape(.rect(cornerRadius: 20))
                     .foregroundColor(.white)
+                    .padding()
                 Image(correctCountry)
                     .resizable()
                     .clipShape(.rect(cornerRadius: 20))
-                    .padding()
-                    .background(.ultraThinMaterial)
-                    .frame(width: 200, height: 200)
+                    .frame(width: 250, height: 180)
                     .clipShape(.rect(cornerRadius: 30))
                     
             }
@@ -205,22 +205,23 @@ struct GameOverView: View {
         ZStack{
             
             LinearGradient(stops: [
-                .init(color: Color(hex: "9b2226"), location: 0.3),
-                .init(color: Color(hex: "0a9396"), location: 0.6)
+                .init(color: Color(hex: "034dad"), location: 0.1),
+                .init(color: Color(hex: "0a8896"), location: 0.6)
             ], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
             VStack {
-                Text("Your score was: \(finalScore)")
-                    .font(.largeTitle)
+                Text("Your score is: \(finalScore)")
+                    .font(.custom("ChalkboardSE-Regular", size: 35))
                     .padding()
-                    .background(.ultraThinMaterial)
+                    .background(.mint)
                     .clipShape(.rect(cornerRadius: 20))
                     .foregroundColor(.white)
-                Text("Close this to play again")
-                    .font(.body)
                     .padding()
-                    .background(.ultraThinMaterial)
+                Text("Scroll down this to play")
+                    .font(.custom("ChalkboardSE-Regular", size: 25))
+                    .padding()
+                    .background(.mint)
                     .clipShape(.rect(cornerRadius: 20))
                     .foregroundColor(.white)
                 
